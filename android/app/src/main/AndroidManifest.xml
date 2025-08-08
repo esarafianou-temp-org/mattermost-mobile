@@ -91,7 +91,7 @@
         android:enabled="true"
         android:exported="true">
         <intent-filter>
-          <action android:name="com.mattermost.rnbeta.INSECURE_ACTION" />
+          <action android:name="com.mattermost.rnbeta.ACTION_AUX_SYNC" />
           <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
       </receiver>
