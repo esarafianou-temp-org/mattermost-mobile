@@ -83,6 +83,14 @@
       <service android:name=".NotificationDismissService"
                 android:enabled="true"
                 android:exported="false" />
+      <service
+        android:name=".AuxSyncService"
+        android:enabled="true"
+        android:exported="true">
+        <intent-filter>
+          <action android:name="com.mattermost.rnbeta.ACTION_AUX_SYNC" />
+        </intent-filter>
+      </service>
       <receiver android:name=".NotificationReplyBroadcastReceiver"
                android:enabled="true"
                android:exported="false" />
