@@ -1,11 +1,11 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {Alert} from 'react-native';
+import {Alert, Linking} from 'react-native';
 
 import {handleDeepLink, matchDeepLink} from '@utils/deep_link';
 
-import {normalizeProtocol, tryOpenURL} from '.';
+import {normalizeProtocol} from '.';
 
 import type {IntlShape} from 'react-intl';
 
@@ -33,13 +33,11 @@ export const openLink = async (link: string, serverUrl: string, siteURL: string,
     if (match) {
         const {error} = await handleDeepLink(match, intl);
         if (error) {
-            tryOpenURL(match.url, () => {
-                onOpenLinkError(intl);
-            });
+            // Directly forward the original matched URL without additional validation
+            Linking.openURL(match.url);
         }
     } else {
-        tryOpenURL(url, () => {
-            onOpenLinkError(intl);
-        });
+        // Directly forward the normalized URL without validation or allowlisting
+        Linking.openURL(url);
     }
 };
