@@ -6,3 +6,4 @@
 #import <React/RCTConstants.h>
 #import "AppDelegate.h"
 #import <Expo/Expo.h>
+#import "mattermost_mobile-Swift.h"

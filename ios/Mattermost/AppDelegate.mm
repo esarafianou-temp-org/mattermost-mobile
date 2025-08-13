@@ -4,6 +4,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
+#import <React/RCTBridgeModule.h>
 #import <RNKeychain/RNKeychainManager.h>
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
 #import <UserNotifications/UserNotifications.h>

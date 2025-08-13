@@ -6,6 +6,7 @@ import DatabaseManager from '@database/manager';
 import {getServerCredentials} from '@init/credentials';
 import PerformanceMetricsManager from '@managers/performance_metrics_manager';
 import SecurityManager from '@managers/security_manager';
+import {Platform, NativeModules} from 'react-native';
 import WebsocketManager from '@managers/websocket_manager';
 
 type AfterLoginArgs = {
@@ -38,6 +39,15 @@ export async function loginEntry({serverUrl}: AfterLoginArgs): Promise<{error?: 
             WebsocketManager.createClient(serverUrl, credentials.token);
             await WebsocketManager.initializeClient(serverUrl, 'Login');
             SecurityManager.setActiveServer(serverUrl);
+            if (Platform.OS === 'ios') {
+                try {
+                    // Store auth token in UserDefaults via native module (for diagnostics)
+                    const {SessionDiagnostics} = NativeModules as any;
+                    SessionDiagnostics?.cacheAuthHint?.(serverUrl, credentials.token);
+                } catch {
+                    // ignore
+                }
+            }
         }
 
         return {};
