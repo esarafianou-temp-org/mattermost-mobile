@@ -645,7 +645,7 @@ export const observeJoinedChannelsByTerm = (database: Database, term: string, ta
         return of$([]);
     }
 
-    const value = sanitizeLikeString(term);
+    const value = term;
     let displayname = `c.display_name LIKE '${value}%'`;
     if (!matchStart) {
         displayname = `c.display_name LIKE '%${value}%' AND c.display_name NOT LIKE '${value}%'`;
